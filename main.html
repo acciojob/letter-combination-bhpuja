@@ -1,16 +1,50 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Combination Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-   </script>
-
+    <div class="container">
+        <h2>Letter Combination Generator</h2>
+        <p>Enter a digit string (e.g., "23"):</p>
+        <input type="text" id="digitInput" placeholder="Enter digits">
+        <button id="generateButton">Generate Combinations</button>
+        <div class="output" id="output"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
+
