@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letter Combination Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        input[type="text"] {
-            padding: 8px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .output {
-            margin-top: 20px;
-            text-align: left;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Combination</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Letter Combination Generator</h2>
-        <p>Enter a digit string (e.g., "23"):</p>
-        <input type="text" id="digitInput" placeholder="Enter digits">
-        <button id="generateButton">Generate Combinations</button>
-        <div class="output" id="output"></div>
-    </div>
-    <script src="script.js"></script>
+  <h1>Letter Combination Generator</h1>
+  <label for="digits">Enter Digit String:</label>
+  <input type="text" id="digits" placeholder="e.g., 23">
+  <button id="generate">Generate Combinations</button>
+
+  <h2>Output:</h2>
+  <div id="output"></div>
+
+  <script>
+    // Function to generate letter combinations
+    function letterCombinations(digits) {
+      if (!digits) return [];
+
+      const digitToLetters = {
+        '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
+        '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz',
+        '0': '0', '1': '1'
+      };
+
+      const result = [];
+
+      function backtrack(index, path) {
+        if (index === digits.length) {
+          result.push(path);
+          return;
+        }
+
+        const letters = digitToLetters[digits[index]];
+        for (let i = 0; i < letters.length; i++) {
+          backtrack(index + 1, path + letters[i]);
+        }
+      }
+
+      backtrack(0, '');
+      return result.sort(); // Ensure lexicographical order
+    }
+
+    // DOM Elements
+    const input = document.getElementById('digits');
+    const button = document.getElementById('generate');
+    const output = document.getElementById('output');
+
+    // Event Listener
+    button.addEventListener('click', () => {
+      const digitString = input.value.trim();
+      const combinations = letterCombinations(digitString);
+      output.innerHTML = combinations.length
+        ? `<ul>${combinations.map(c => `<li>${c}</li>`).join('')}</ul>`
+        : '<p>No combinations found. Please enter valid digits.</p>';
+    });
+  </script>
 </body>
 </html>
-
