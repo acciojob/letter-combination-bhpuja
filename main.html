@@ -1,9 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Letter Combinations</title>
+  <title>Letter Combination Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    label, button {
+      display: block;
+      margin: 10px 0;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 <body>
   <h1>Letter Combination Generator</h1>
@@ -12,10 +57,9 @@
   <button id="generate">Generate Combinations</button>
 
   <h2>Output:</h2>
-  <div id="output"></div>
+  <div id="output">Enter a digit string and click Generate.</div>
 
   <script>
-    // Function to generate letter combinations
     function letterCombinations(digits) {
       if (!digits) return [];
 
@@ -43,18 +87,19 @@
       return result.sort(); // Ensure lexicographical order
     }
 
-    // DOM Elements
-    const input = document.getElementById('digits');
-    const button = document.getElementById('generate');
-    const output = document.getElementById('output');
+    document.getElementById('generate').addEventListener('click', () => {
+      const input = document.getElementById('digits').value.trim();
+      const output = document.getElementById('output');
 
-    // Event Listener
-    button.addEventListener('click', () => {
-      const digitString = input.value.trim();
-      const combinations = letterCombinations(digitString);
+      if (!input || !/^[0-9]+$/.test(input)) {
+        output.textContent = 'Please enter a valid digit string containing numbers 0-9.';
+        return;
+      }
+
+      const combinations = letterCombinations(input);
       output.innerHTML = combinations.length
         ? `<ul>${combinations.map(c => `<li>${c}</li>`).join('')}</ul>`
-        : '<p>No combinations found. Please enter valid digits.</p>';
+        : 'No combinations found.';
     });
   </script>
 </body>
